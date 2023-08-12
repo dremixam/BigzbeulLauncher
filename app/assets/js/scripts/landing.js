@@ -240,17 +240,17 @@ const refreshMojangStatuses = async function(){
 }
 
 const refreshServerStatus = async (fade = false) => {
-    loggerLanding.info('Refreshing Server Status')
+    loggerLanding.info('Actualisation du statut du serveur')
     const serv = (await DistroAPI.getDistribution()).getServerById(ConfigManager.getSelectedServer())
 
-    let pLabel = 'SERVER'
-    let pVal = 'OFFLINE'
+    let pLabel = 'SERVEUR'
+    let pVal = 'HORS-LIGNE'
 
     try {
 
         const servStat = await getServerStatus(47, serv.hostname, serv.port)
         console.log(servStat)
-        pLabel = 'PLAYERS'
+        pLabel = 'JOUEURS'
         pVal = servStat.players.online + '/' + servStat.players.max
 
     } catch (err) {
