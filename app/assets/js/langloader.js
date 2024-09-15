@@ -1,7 +1,5 @@
 const fs = require('fs-extra')
 const path = require('path')
-const toml = require('toml')
-const merge = require('lodash.merge')
 
 let lang
 
