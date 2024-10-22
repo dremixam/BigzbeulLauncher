@@ -10,13 +10,19 @@ exports.loadLanguage = function(id){
     try { lang = merge(lang || {}, JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'lang', `${id}.json`))) || {}) } catch (err) { console.log(err) }
 }
 
-exports.query = function(id){
+exports.query = function(id, placeHolders){
     let query = id.split('.')
     let res = lang
     for(let q of query){
         res = res[q]
     }
-    return res === lang ? {} : res
+    let text = res === lang ? '' : res
+    if (placeHolders) {
+        Object.entries(placeHolders).forEach(([key, value]) => {
+            text = text.replace(`{${key}}`, value)
+        })
+    }
+    return text
 }
 
 exports.queryJS = function(id, placeHolders){
